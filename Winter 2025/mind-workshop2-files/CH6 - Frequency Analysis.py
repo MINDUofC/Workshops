@@ -2,8 +2,7 @@ from matplotlib import pyplot as plt
 import pandas as pd
 import numpy as np
 from scipy import signal
-import pywt
-import mne
+
 
 eeg_data = pd.read_excel("tempData.xlsx")
 
@@ -120,83 +119,6 @@ plt.xlim([0, 20])
 plt.show()
 
 
-
-# WAVELET TRANSFORM
-
-# define wavelet function and decomposition level
-wavelet = 'db4'
-# can also use haar and sym5
-
-level = 3
-
-# perform wavelet decomposition
-coeffs = pywt.wavedec(channel_data_bp_filtered, wavelet, level=level)
-
-"""
-pywt.wavedec(data, wavelet, mode='symmetric', level=None, axis=-1)
-Parameters
-
-data (array-like): The input signal to be decomposed. Can be 1D, 2D, or multidimensional.
-
-wavelet (str or pywt.Wavelet):
-The wavelet to use for decomposition. Examples: 'db4', 'haar', 'sym5'.
-Use pywt.wavelist() to list all available wavelets.
-
-mode (str, optional):
-Signal extension mode to handle border effects.
-Options: 'symmetric' (default), 'periodic', 'zero', 'smooth', etc.
-See pywt.Modes.modes for all options.
-
-level (int, optional):
-The number of decomposition levels. If None, it defaults to the maximum level possible for the input length and the 
-wavelet filter length. This is essentially the number of different parts to split the initial signal into
-
-axis (int, optional):
-The axis along which to perform the decomposition (default is -1 for the last axis).
-
-Returns a list of ndarray:
-The first element is the approximation coefficients at the final level.
-The subsequent elements are the detail coefficients for each level in ord
-
-"""
-
-
-
-# plot wavelet coefficients
-fig, axs = plt.subplots(level+1, 1, figsize=(12, 6))
-                        # we do level + 1 since the approx coeff is one extra
-
-# plot approximation coefficient
-axs[0].plot(coeffs[0], 'g')   # green coloured
-
-
-axs[3].set_ylabel('Amplitude[D]')
-axs[2].set_ylabel('Amplitude[D]')
-axs[1].set_ylabel('Amplitude[D]')
-axs[0].set_ylabel('Amplitude[A]')
-
-
-"""
-Approximation Coefficients (A):
-Represents the low-frequency, smooth parts of the signal.
-
-Detail Coefficients (D):
-Represents the high-frequency, detailed parts of the signal.
-
-Decomposition Levels:
-Higher levels focus on coarser details.
-Level 1: Most detailed, higher frequency.
-Final Level: Smoothest approximation.
-"""
-
-
-# plot detail coefficients
-for i, detail_coeffs in enumerate(coeffs[1:]):
-    axs[i+1].plot(detail_coeffs, 'b') # blue coloured
-
-axs[-1].set_xlabel('Sample')
-plt.tight_layout()
-plt.show()
 
 # HILBERT TRANSFORM
 

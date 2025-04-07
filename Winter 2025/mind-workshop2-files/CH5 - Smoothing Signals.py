@@ -110,6 +110,8 @@ def average_filter(data, average_length):
 # Second window: [2, 3, 4] → Average = (2+3+4)/3 = 3
 # Third window: [3, 4, 5] → Average = (3+4+5)/3 = 4
 # you can control the "smoothness" of the data by changing the window size, larger window = smoother
+
+
 average_length_window_1 = 40
 average_length_window_2 = 70
 

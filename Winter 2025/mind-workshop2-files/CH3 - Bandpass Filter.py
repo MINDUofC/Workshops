@@ -65,11 +65,10 @@ nyq = 0.5 * fps  # Nyquist's frequency (half of the sampling frequency)
 # apply the band-pass filter
 # the band-pass filter is just both the butter highpass and low pass combined
 
-channel_data_bp_filtered = butter_highpass_filter(
-    data=channel_data_bp_filtered,
-    cutoff=cutoff_high,
-    nyq=nyq,
-    order=5)
+channel_data_bp_filtered = butter_highpass_filter( data=channel_data_bp_filtered,
+                                                    cutoff=cutoff_high,
+                                                    nyq=nyq,
+                                                    order=5)
 
 channel_data_bp_filtered = butter_lowpass_filter(
     data=channel_data_bp_filtered,
@@ -92,14 +91,14 @@ eeg_data_filtered = eeg_data.copy()
 for channel in range(eeg_data.shape[1]): #0 = row, 1 = columns aka channels
 
     eeg_data_filtered.iloc[:, channel] = butter_highpass_filter(
-        data=eeg_data.iloc[:, channel],
-        cutoff=cutoff_high,
-        nyq=nyq,
-        order=5)
+                                                                data=eeg_data.iloc[:, channel],
+                                                                cutoff=cutoff_high,
+                                                                nyq=nyq,
+                                                                order=5)
     eeg_data_filtered.iloc[:, channel] = butter_lowpass_filter(
-        data=eeg_data_filtered.iloc[:, channel],
-        cutoff=cutoff_low,
-        nyq=nyq,
-        order=4)
+                                                                data=eeg_data_filtered.iloc[:, channel],
+                                                                cutoff=cutoff_low,
+                                                                nyq=nyq,
+                                                                order=4)
 
 print(eeg_data_filtered)

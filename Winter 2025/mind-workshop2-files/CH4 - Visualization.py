@@ -3,47 +3,6 @@ import pandas as pd
 import numpy as np
 from scipy import signal
 import mne
-from pydrive2.auth import GoogleAuth
-from pydrive2.drive import GoogleDrive
-import os
-
-
-# authorize = GoogleAuth()
-# # Check if token file exists
-# if os.path.exists('credentials.json'):
-#     authorize.LoadCredentialsFile('credentials.json')  # Load saved credentials
-#     if authorize.access_token_expired:  # Refresh if expired
-#         authorize.LoadClientConfigFile('client_secrets.json')
-#         authorize.LocalWebserverAuth()  # Perform browser-based authentication
-#         authorize.SaveCredentialsFile('credentials.json')  # Save credential
-#     else:
-#         authorize.Authorize()  # Authorize if valid
-# else:
-#     authorize.LoadClientConfigFile('client_secrets.json')
-#     authorize.LocalWebserverAuth()  # Perform browser-based authentication
-#     authorize.SaveCredentialsFile('credentials.json')  # Save credentials
-#
-# # Initialize GoogleDrive with authenticated GoogleAuth instance
-# drive = GoogleDrive(authorize)
-#
-# #this is the search or query to find the file "dataset.xlsx"
-# file_list = drive.ListFile({'q': "title = 'dataset.xlsx' and trashed=false"}).GetList()
-#
-#
-#
-#
-# if file_list:
-#     # If the file is found, print details and download it
-#     file = file_list[0]  # Get the first match (in case of multiple files with the same name)
-#     print(f"File found: Title: {file['title']}, ID: {file['id']}")
-#
-#     file.GetContentFile("tempData.xlsx")
-
-
-
-
-
-
 
 #RAW DATA TO USABLE DATA
 
@@ -186,6 +145,8 @@ plt.title("EEG Heatmap")
 plt.show()
 
 
+# TOPOMAP
+
 #MNE LIBRARY APPLICATION
 """
 Here we make preparation to convert our dataset to MNE library format
@@ -233,12 +194,5 @@ fake_evoked = mne.EvokedArray(data_after_band_pass_filter, fake_info)
 fake_evoked.set_montage(standard_montage, on_missing='ignore')
 
 times_to_plot = np.arange(0, 28., 4)
+# plot topo maps at various times
 fake_evoked.plot_topomap(times_to_plot, ch_type="eeg", ncols=len(times_to_plot), nrows="auto")
-plt.show()
-
-
-
-
-
-# else:
-#     print("File 'dataset.xlsx' not found.")
