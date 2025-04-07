@@ -131,31 +131,6 @@ plt.xlim([0, 2000])  # zoom in the data
 plt.show()
 # Very clear that it gets smoother as window size increases
 
-# GUASSIAN FILTER
-
-from scipy.ndimage import gaussian_filter1d # this is the specific built-in function for guassian 1D filtering from scipy
-
-# you can control the "smoothness" of the data by changing
-# the kernel's standard deviation value,
-sigma_value_1 = 45 # standard deviation of the Gaussian kernel
-sigma_value_2 = 15 # standard deviation of the Gaussian kernel
-
-channel_data_gauss_window_1 = gaussian_filter1d(channel_data_bp_filtered, sigma=sigma_value_1)
-channel_data_gauss_window_2 = gaussian_filter1d(channel_data_bp_filtered, sigma=sigma_value_2)
-
-# plot the data
-plt.title("Gaussian filter, Channel " +  str(channel+1))
-plt.xlabel("Sample")
-plt.ylabel("EEG, µV")
-plt.plot(channel_data_bp_filtered, label='Data before Gaussian filter')
-plt.plot(channel_data_gauss_window_1, label='Data after Gaussian filter (sigma='+str(sigma_value_1)+")")
-plt.plot(channel_data_gauss_window_2, label='Data after Gaussian filter (sigma='+str(sigma_value_2)+")")
-plt.legend(loc='upper left')
-plt.xlim([0, 2000])  # zoom in the data
-plt.show()
-# Very clear that higher Std Deviation of the kernel increases smoothness, and lower std dev preserves small details
-# of original signal
-
 
 #MEDIAN FILTER
 from scipy.ndimage import median_filter
