@@ -57,8 +57,8 @@ def butter_lowpass_filter(data, cutoff, nyq, order=5):
 channel_data_bp_filtered = eeg_data.iloc[:,0]  #channel 1 data
 
 fps = 250  # sampling frequency
-cutoff_high = 1  # cutoff frequency of the high-pass filter
-cutoff_low = 10  # cutoff frequency of the low-pass filter
+cutoff_high =  1  # cutoff frequency of the high-pass filter
+cutoff_low = 10 # cutoff frequency of the low-pass filter
 nyq = 0.5 * fps  # Nyquist's frequency (half of the sampling frequency)
 
 # apply the band-pass filter
